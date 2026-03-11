@@ -83,11 +83,7 @@ export const Chat = () => {
     // quirks that can cause the hero card to collapse.  The `flex-1` on the
     // `main` element below allows it to expand and scroll when necessary.
     <div className="min-h-[100svh] bg-slate-100 relative overflow-x-hidden flex flex-col">
-      <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full border-[24px] border-sky-700" />
-        <div className="absolute top-28 right-[-120px] w-[420px] h-[420px] rounded-full border-[18px] border-teal-600" />
-        <div className="absolute bottom-[-160px] left-1/3 w-[520px] h-[520px] rounded-full border-[20px] border-blue-900" />
-      </div>
+      
 
       <header className="relative z-10 bg-[#0C3D63] text-white shadow-lg border-b border-white/10 shrink-0">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 md:py-2.5 flex items-center justify-between gap-3">
