@@ -82,7 +82,7 @@ export const Chat = () => {
     // layout to `flex flex-col` simplifies the layout and avoids row height
     // quirks that can cause the hero card to collapse.  The `flex-1` on the
     // `main` element below allows it to expand and scroll when necessary.
-    <div className="min-h-[100svh] bg-slate-100 relative overflow-x-hidden flex flex-col">
+    <div className="min-h-[100svh] bg-slate-100 relative overflow-hidden flex flex-col">
       
 
       <header className="relative z-10 bg-[#0C3D63] text-white shadow-lg border-b border-white/10 shrink-0">

@@ -9,7 +9,7 @@ export default function Home() {
     // viewport height while still allowing it to grow if needed.  We also avoid
     // hiding vertical overflow so the hero card and conversation area aren't
     // clipped when the content grows beyond the viewport【355490015329951†L46-L66】.
-    <div className="min-h-[100svh] bg-slate-100 overflow-x-hidden flex flex-col">
+    <div className="min-h-[100svh] bg-slate-100 overflow-hidden flex flex-col">
       <Chat />
     </div>
   );
