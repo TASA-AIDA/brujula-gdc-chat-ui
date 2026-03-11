@@ -74,7 +74,7 @@ export const Chat = () => {
   };
 
   return (
-    <div className="min-h-[100svh] bg-slate-100 relative overflow-hidden grid grid-rows-[auto_1fr]">
+    <div className="h-full bg-slate-100 relative overflow-hidden grid grid-rows-[auto_1fr]">
       <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full border-[24px] border-sky-700" />
         <div className="absolute top-28 right-[-120px] w-[420px] h-[420px] rounded-full border-[18px] border-teal-600" />
