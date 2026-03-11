@@ -36,22 +36,22 @@ export const MessageList = ({
   const isEmpty = messages.length === 0 && !streamingMessage;
 
   return (
-    <div className="flex flex-col space-y-6 py-1">
+    <div className="flex flex-col space-y-4 py-1">
       {isEmpty && (
         <>
-          <div className="flex items-start gap-4 max-w-4xl">
-            <div className="w-12 h-12 rounded-2xl bg-[#0C3D63] text-white flex items-center justify-center text-xl shadow-md shrink-0">
+          <div className="flex items-start gap-3 max-w-4xl">
+            <div className="w-10 h-10 rounded-2xl bg-[#0C3D63] text-white flex items-center justify-center text-base shadow-md shrink-0">
               🧭
             </div>
-            <div className="rounded-[24px] rounded-tl-md bg-[#EAF4FB] border border-sky-100 px-5 py-4 shadow-sm">
-              <p className="text-slate-800 text-base md:text-lg font-medium mb-2">Hola, soy Brújula de Aprendizaje.</p>
-              <p className="text-slate-600 leading-relaxed">
+            <div className="rounded-[22px] rounded-tl-md bg-[#EAF4FB] border border-sky-100 px-4 md:px-5 py-3 md:py-4 shadow-sm">
+              <p className="text-slate-800 text-base md:text-lg font-medium mb-1.5">Hola, soy Brújula de Aprendizaje.</p>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                 Puedo ayudarte a diseñar capacitaciones, estructurar experiencias de aprendizaje o crear herramientas para compartir conocimiento dentro del equipo.
               </p>
-              <p className="text-slate-700 mt-3 leading-relaxed">
+              <p className="text-slate-700 mt-2 leading-relaxed text-sm md:text-base">
                 Si lo necesitas, primero resumiré lo que entendí de tu solicitud para asegurar que vamos por buen camino.
               </p>
-              <p className="text-slate-800 mt-3 font-medium">¿Qué te gustaría construir o mejorar hoy?</p>
+              <p className="text-slate-800 mt-2 font-medium text-sm md:text-base">¿Qué te gustaría construir o mejorar hoy?</p>
             </div>
           </div>
 
@@ -63,9 +63,9 @@ export const MessageList = ({
                   type="button"
                   disabled={quickActionsDisabled}
                   onClick={() => onQuickAction?.(item)}
-                  className="text-left rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="text-left rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="text-slate-800 font-medium">{item}</span>
+                  <span className="text-slate-800 font-medium text-sm md:text-base">{item}</span>
                 </button>
               ))}
             </div>
