@@ -23,35 +23,43 @@ export const ChatInput = ({
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-end gap-x-2 p-4 bg-white dark:bg-transparent"
-      >
-        <div className="flex-1">
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <div className="flex items-center gap-3 rounded-[24px] border border-slate-200 bg-slate-50 px-3 md:px-4 py-3 shadow-inner">
+          <button
+            type="button"
+            aria-label="Agregar contexto"
+            className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-700 text-2xl flex items-center justify-center shrink-0 hover:bg-emerald-100 transition"
+          >
+            +
+          </button>
+
           <input
             type="text"
             value={message}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
-            placeholder="Escribe un mensaje"
-            className="w-full rounded-lg border-2 border-gray-200 dark:border-gray-700 p-2 
-              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-              focus:outline-none focus:border-[#0ad17b] dark:focus:border-[#0ad17b] focus:ring-2 transition focus:ring-[#0ce989] dark:focus:ring-[#07b56a]
-              placeholder-gray-500 dark:placeholder-gray-400"
+            placeholder="Describe la capacitación, el público o la necesidad de aprendizaje..."
+            className="flex-1 bg-transparent outline-none text-slate-700 placeholder:text-slate-400 text-sm md:text-base"
           />
+
+          <button
+            type="submit"
+            disabled={!message.trim() || isLoading}
+            className="rounded-2xl bg-[#1AA56B] hover:bg-[#15925e] text-white font-semibold px-5 py-3 shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : (
+              <span className="inline-flex items-center gap-2">
+                Enviar
+                <SendHorizontal className="h-4 w-4" />
+              </span>
+            )}
+          </button>
         </div>
-        <button
-          type="submit"
-          disabled={!message.trim() || isLoading}
-          className="p-2.5 bg-[#07b56a] text-white rounded-lg 
-            hover:bg-[#09995b] dark:hover:bg-[#09995b]
-            disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          {isLoading ? (
-            <Loader2 className="h-6 w-6 animate-spin" />
-          ) : (
-            <SendHorizontal className="h-6 w-6" />
-          )}
-        </button>
+
+        <p className="text-xs text-slate-400 px-1">
+          Ejemplo: Necesito diseñar una capacitación práctica para un equipo operativo.
+        </p>
       </form>
     </div>
   );

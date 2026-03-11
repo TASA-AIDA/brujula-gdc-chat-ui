@@ -8,9 +8,18 @@ import { useRef, useEffect } from "react";
 interface MessageListProps {
   messages: Message[];
   streamingMessage?: string;
+  quickActions?: string[];
+  onQuickAction?: (action: string) => void;
+  quickActionsDisabled?: boolean;
 }
 
-export const MessageList = ({ messages, streamingMessage }: MessageListProps) => {
+export const MessageList = ({
+  messages,
+  streamingMessage,
+  quickActions = [],
+  onQuickAction,
+  quickActionsDisabled = false,
+}: MessageListProps) => {
   // Referencia para el scroll automático
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -24,9 +33,46 @@ export const MessageList = ({ messages, streamingMessage }: MessageListProps) =>
     scrollToBottom();
   }, [messages, streamingMessage]);
 
+  const isEmpty = messages.length === 0 && !streamingMessage;
+
   return (
-    // Contenedor principal de la lista de mensajes
-    <div className="flex flex-col space-y-6 py-4">
+    <div className="flex flex-col space-y-6 py-1">
+      {isEmpty && (
+        <>
+          <div className="flex items-start gap-4 max-w-4xl">
+            <div className="w-12 h-12 rounded-2xl bg-[#0C3D63] text-white flex items-center justify-center text-xl shadow-md shrink-0">
+              🧭
+            </div>
+            <div className="rounded-[24px] rounded-tl-md bg-[#EAF4FB] border border-sky-100 px-5 py-4 shadow-sm">
+              <p className="text-slate-800 text-base md:text-lg font-medium mb-2">Hola, soy Brújula de Aprendizaje.</p>
+              <p className="text-slate-600 leading-relaxed">
+                Puedo ayudarte a diseñar capacitaciones, estructurar experiencias de aprendizaje o crear herramientas para compartir conocimiento dentro del equipo.
+              </p>
+              <p className="text-slate-700 mt-3 leading-relaxed">
+                Si lo necesitas, primero resumiré lo que entendí de tu solicitud para asegurar que vamos por buen camino.
+              </p>
+              <p className="text-slate-800 mt-3 font-medium">¿Qué te gustaría construir o mejorar hoy?</p>
+            </div>
+          </div>
+
+          {quickActions.length > 0 && (
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 max-w-6xl">
+              {quickActions.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  disabled={quickActionsDisabled}
+                  onClick={() => onQuickAction?.(item)}
+                  className="text-left rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="text-slate-800 font-medium">{item}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+
       {/* Mapeo de los mensajes existentes */}
       {messages.map((message, index) => (
         <div
@@ -38,10 +84,10 @@ export const MessageList = ({ messages, streamingMessage }: MessageListProps) =>
           })}
         >
           <div
-            className={clsx("max-w-[85%] rounded-2xl px-4 py-3", {
+            className={clsx("max-w-[88%] rounded-2xl px-4 py-3 shadow-sm", {
               // Estilos condicionales según el rol del mensaje
-              "bg-[#09995b] text-white": message.role === "user",
-              "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100":
+              "bg-[#1AA56B] text-white rounded-br-md": message.role === "user",
+              "bg-white border border-slate-200 text-slate-800 rounded-bl-md":
                 message.role === "assistant",
             })}
           >
@@ -53,6 +99,7 @@ export const MessageList = ({ messages, streamingMessage }: MessageListProps) =>
                   return <img {...props} className="rounded-xl my-2.5" />;
                 },
               }}
+              className="prose prose-sm max-w-none prose-p:my-2 prose-pre:rounded-xl prose-pre:bg-slate-900 prose-headings:my-3"
             >
               {message.content}
             </Markdown>
@@ -63,8 +110,8 @@ export const MessageList = ({ messages, streamingMessage }: MessageListProps) =>
       {/* Renderizado del mensaje en streaming */}
       {streamingMessage && (
         <div className="flex justify-start">
-          <div className="max-w-[85%] rounded-2xl px-4 py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-            <Markdown>{streamingMessage}</Markdown>
+          <div className="max-w-[88%] rounded-2xl rounded-bl-md px-4 py-3 bg-white border border-slate-200 text-slate-800 shadow-sm">
+            <Markdown className="prose prose-sm max-w-none prose-p:my-2">{streamingMessage}</Markdown>
           </div>
         </div>
       )}
