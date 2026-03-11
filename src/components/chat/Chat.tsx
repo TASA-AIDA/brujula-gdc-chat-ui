@@ -74,7 +74,7 @@ export const Chat = () => {
   };
 
   return (
-    <div className="h-full bg-slate-100 relative overflow-hidden flex flex-col">
+    <div className="min-h-[100svh] bg-slate-100 relative overflow-hidden grid grid-rows-[auto_1fr]">
       <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full border-[24px] border-sky-700" />
         <div className="absolute top-28 right-[-120px] w-[420px] h-[420px] rounded-full border-[18px] border-teal-600" />
@@ -104,7 +104,7 @@ export const Chat = () => {
         </div>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-2.5 md:py-3 flex-1 min-h-0 flex flex-col gap-2.5 overflow-hidden">
+      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-2.5 md:py-3 min-h-0 flex flex-col gap-2.5 overflow-hidden">
         <section>
           <div className="rounded-[20px] bg-gradient-to-r from-[#0C3D63] to-[#1D6E8C] text-white p-3 md:p-3.5 shadow-xl border border-white/10">
             <div className="max-w-3xl">
