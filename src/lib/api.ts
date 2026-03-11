@@ -82,8 +82,12 @@ export const chatApi = {
       buffer = split.rest;
 
       for (const event of events) {
-        const lines = event.includes('\\n') ? event.split('\\n') : event.split(/\r?\n/);
-        for (const line of lines) {
+        const lines = event.split(/\r?\n/);
+
+        // Si el bloque no trae saltos de linea reales (caso proxy con delimitador escapado),
+        // lo tratamos como una sola linea para no romper escapes JSON como "\\n" dentro del contenido.
+        const normalizedLines = lines.length > 1 ? lines : [event];
+        for (const line of normalizedLines) {
           if (!line.startsWith('data:')) {
             continue;
           }
