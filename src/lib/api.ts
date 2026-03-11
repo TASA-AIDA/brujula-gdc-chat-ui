@@ -49,24 +49,46 @@ export const chatApi = {
     const decoder = new TextDecoder();
     let accumulatedMessage = '';
     let buffer = '';
+    let doneEmitted = false;
 
     if (!reader) throw new Error('Failed to get response reader');
+
+    const splitEvents = (source: string): { events: string[]; rest: string } => {
+      if (source.includes('\r\n\r\n')) {
+        const parts = source.split('\r\n\r\n');
+        return { events: parts.slice(0, -1), rest: parts[parts.length - 1] ?? '' };
+      }
+
+      if (source.includes('\n\n')) {
+        const parts = source.split('\n\n');
+        return { events: parts.slice(0, -1), rest: parts[parts.length - 1] ?? '' };
+      }
+
+      // Algunos backends/proxies envian los separadores como texto escapado: "\\n\\n"
+      if (source.includes('\\n\\n')) {
+        const parts = source.split('\\n\\n');
+        return { events: parts.slice(0, -1), rest: parts[parts.length - 1] ?? '' };
+      }
+
+      return { events: [], rest: source };
+    };
 
     while (true) {
       const { done, value } = await reader.read();
       buffer += decoder.decode(value, { stream: !done });
 
-      const events = buffer.split('\n\n');
-      buffer = events.pop() ?? '';
+      const split = splitEvents(buffer);
+      const events = split.events;
+      buffer = split.rest;
 
       for (const event of events) {
-        const lines = event.split('\n');
+        const lines = event.includes('\\n') ? event.split('\\n') : event.split(/\r?\n/);
         for (const line of lines) {
-          if (!line.startsWith('data: ')) {
+          if (!line.startsWith('data:')) {
             continue;
           }
 
-          const jsonStr = line.slice(6);
+          const jsonStr = line.slice(5).trimStart();
           try {
             const data = JSON.parse(jsonStr);
 
@@ -74,9 +96,11 @@ export const chatApi = {
               accumulatedMessage += data.content;
               onChunk({ content: accumulatedMessage, status: 'streaming' });
             } else if (data.status === 'done') {
+              doneEmitted = true;
               onChunk({ content: accumulatedMessage, status: 'done' });
               return { content: accumulatedMessage, status: 'done' };
             } else if (data.status === 'error') {
+              doneEmitted = true;
               const error = typeof data.error === 'string' ? data.error : 'Unknown chat error';
               onChunk({ status: 'error', error });
               return { status: 'error', error };
@@ -88,6 +112,10 @@ export const chatApi = {
       }
 
       if (done) break;
+    }
+
+    if (!doneEmitted && accumulatedMessage) {
+      onChunk({ content: accumulatedMessage, status: 'done' });
     }
 
     return { content: accumulatedMessage, status: 'done' };
