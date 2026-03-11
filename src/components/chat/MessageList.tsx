@@ -36,36 +36,36 @@ export const MessageList = ({
   const isEmpty = messages.length === 0 && !streamingMessage;
 
   return (
-    <div className="flex flex-col space-y-4 py-1">
+    <div className="flex flex-col space-y-3 py-0.5">
       {isEmpty && (
         <>
-          <div className="flex items-start gap-3 max-w-4xl">
+          <div className="flex items-start gap-2.5 max-w-4xl">
             <div className="w-10 h-10 rounded-2xl bg-[#0C3D63] text-white flex items-center justify-center text-base shadow-md shrink-0">
               🧭
             </div>
-            <div className="rounded-[22px] rounded-tl-md bg-[#EAF4FB] border border-sky-100 px-4 md:px-5 py-3 md:py-4 shadow-sm">
-              <p className="text-slate-800 text-base md:text-lg font-medium mb-1.5">Hola, soy Brújula de Aprendizaje.</p>
-              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+            <div className="rounded-[20px] rounded-tl-md bg-[#EAF4FB] border border-sky-100 px-4 py-2.5 md:py-3 shadow-sm">
+              <p className="text-slate-800 text-base md:text-lg font-medium mb-1">Hola, soy Brújula de Aprendizaje.</p>
+              <p className="text-slate-600 leading-relaxed text-sm">
                 Puedo ayudarte a diseñar capacitaciones, estructurar experiencias de aprendizaje o crear herramientas para compartir conocimiento dentro del equipo.
               </p>
-              <p className="text-slate-700 mt-2 leading-relaxed text-sm md:text-base">
+              <p className="text-slate-700 mt-1.5 leading-relaxed text-sm">
                 Si lo necesitas, primero resumiré lo que entendí de tu solicitud para asegurar que vamos por buen camino.
               </p>
-              <p className="text-slate-800 mt-2 font-medium text-sm md:text-base">¿Qué te gustaría construir o mejorar hoy?</p>
+              <p className="text-slate-800 mt-1.5 font-medium text-sm">¿Qué te gustaría construir o mejorar hoy?</p>
             </div>
           </div>
 
           {quickActions.length > 0 && (
-            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 max-w-6xl">
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-3 max-w-6xl">
               {quickActions.map((item) => (
                 <button
                   key={item}
                   type="button"
                   disabled={quickActionsDisabled}
                   onClick={() => onQuickAction?.(item)}
-                  className="text-left rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="text-left rounded-2xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="text-slate-800 font-medium text-sm md:text-base">{item}</span>
+                  <span className="text-slate-800 font-medium text-sm">{item}</span>
                 </button>
               ))}
             </div>

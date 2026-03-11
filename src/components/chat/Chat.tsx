@@ -74,7 +74,7 @@ export const Chat = () => {
   };
 
   return (
-    <div className="h-[100dvh] bg-slate-100 relative overflow-hidden flex flex-col">
+    <div className="h-full bg-slate-100 relative overflow-hidden flex flex-col">
       <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full border-[24px] border-sky-700" />
         <div className="absolute top-28 right-[-120px] w-[420px] h-[420px] rounded-full border-[18px] border-teal-600" />
@@ -82,7 +82,7 @@ export const Chat = () => {
       </div>
 
       <header className="relative z-10 bg-[#0C3D63] text-white shadow-lg border-b border-white/10 shrink-0">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2.5 md:py-3 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 md:py-2.5 flex items-center justify-between gap-3">
           <div className="flex items-center gap-4 min-w-0">
             <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center shadow-inner border border-white/15 shrink-0">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-300 to-emerald-300 flex items-center justify-center text-[#0C3D63] text-lg shadow">
@@ -90,42 +90,42 @@ export const Chat = () => {
               </div>
             </div>
             <div className="min-w-0">
-              <h1 className="text-lg md:text-2xl font-bold tracking-tight truncate">Brújula de Aprendizaje</h1>
+              <h1 className="text-base md:text-xl font-bold tracking-tight truncate">Brújula de Aprendizaje</h1>
               <p className="text-xs md:text-sm text-blue-100/90 truncate">Gestión del conocimiento en TASA</p>
             </div>
           </div>
 
           <button
             onClick={handleResetChat}
-            className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2 text-sm hover:bg-white/15 transition shrink-0"
+            className="rounded-2xl border border-white/20 bg-white/10 px-3 py-1.5 text-xs md:text-sm hover:bg-white/15 transition shrink-0"
           >
             Reiniciar
           </button>
         </div>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-3 md:py-4 flex-1 min-h-0 flex flex-col gap-3 overflow-hidden">
+      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-2.5 md:py-3 flex-1 min-h-0 flex flex-col gap-2.5 overflow-hidden">
         <section>
-          <div className="rounded-[22px] bg-gradient-to-r from-[#0C3D63] to-[#1D6E8C] text-white p-3 md:p-4 shadow-xl border border-white/10">
+          <div className="rounded-[20px] bg-gradient-to-r from-[#0C3D63] to-[#1D6E8C] text-white p-3 md:p-3.5 shadow-xl border border-white/10">
             <div className="max-w-3xl">
-              <span className="inline-flex items-center rounded-full bg-white/15 px-2.5 py-1 text-[10px] md:text-xs font-medium mb-1.5 md:mb-2">
+              <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] md:text-xs font-medium mb-1.5">
                 Diseña experiencias que conectan conocimiento con acción
               </span>
-              <h2 className="text-xl md:text-3xl font-bold leading-tight mb-1.5 md:mb-2">
+              <h2 className="text-lg md:text-2xl font-bold leading-tight mb-1">
                 Aprende, comparte y transforma conocimiento
               </h2>
-              <p className="text-xs md:text-sm text-blue-50/90 leading-relaxed line-clamp-2">
+              <p className="text-xs md:text-sm text-blue-50/90 leading-relaxed line-clamp-1 md:line-clamp-2">
                 Te acompaño a diseñar experiencias de aprendizaje claras, útiles y aplicables al contexto laboral de TASA.
               </p>
             </div>
           </div>
         </section>
 
-        <div className="flex-1 min-h-0 rounded-[28px] border border-slate-200 bg-white/85 backdrop-blur shadow-2xl overflow-hidden flex flex-col">
-          <div className="px-4 md:px-6 py-2.5 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between gap-4">
+        <div className="flex-1 min-h-0 rounded-[24px] border border-slate-200 bg-white/85 backdrop-blur shadow-2xl overflow-hidden flex flex-col">
+          <div className="px-4 md:px-6 py-2 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-slate-800 font-semibold text-sm md:text-lg">Asistente de aprendizaje</h3>
-              <p className="text-slate-500 text-xs md:text-sm">Acompaño el diseño de capacitaciones y herramientas de transferencia de conocimiento</p>
+              <h3 className="text-slate-800 font-semibold text-sm md:text-base">Asistente de aprendizaje</h3>
+              <p className="text-slate-500 text-xs">Acompaño el diseño de capacitaciones y herramientas de transferencia de conocimiento</p>
             </div>
             <div className="hidden md:flex items-center gap-2 text-xs text-slate-500 shrink-0">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
@@ -133,7 +133,7 @@ export const Chat = () => {
             </div>
           </div>
 
-          <div className={`flex-1 min-h-0 px-4 md:px-6 py-3 md:py-4 bg-[linear-gradient(180deg,rgba(248,250,252,0.92),rgba(241,245,249,0.78))] ${hasConversation ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
+          <div className={`flex-1 min-h-0 px-4 md:px-6 py-2.5 md:py-3 bg-[linear-gradient(180deg,rgba(248,250,252,0.92),rgba(241,245,249,0.78))] ${hasConversation ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
             <MessageList
               messages={messages}
               streamingMessage={streamingMessage}
@@ -143,7 +143,7 @@ export const Chat = () => {
             />
           </div>
 
-          <div className="border-t border-slate-200 bg-white p-3 md:p-4">
+          <div className="border-t border-slate-200 bg-white p-2.5 md:p-3">
             {errorMessage && (
               <div className="mb-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                 {errorMessage}
