@@ -53,6 +53,29 @@ export const chatApi = {
 
     if (!reader) throw new Error('Failed to get response reader');
 
+    const splitEscapedEvents = (source: string): { events: string[]; rest: string } => {
+      const events: string[] = [];
+      const marker = '\\n\\ndata:';
+      let cursor = 0;
+
+      while (true) {
+        const start = source.indexOf('data:', cursor);
+        if (start === -1) {
+          break;
+        }
+
+        const next = source.indexOf(marker, start);
+        if (next === -1) {
+          return { events, rest: source.slice(start) };
+        }
+
+        events.push(source.slice(start, next));
+        cursor = next + 4; // avanza sobre "\\n\\n" y deja "data:" como inicio del siguiente evento
+      }
+
+      return { events, rest: source.slice(cursor) };
+    };
+
     const splitEvents = (source: string): { events: string[]; rest: string } => {
       if (source.includes('\r\n\r\n')) {
         const parts = source.split('\r\n\r\n');
@@ -64,10 +87,9 @@ export const chatApi = {
         return { events: parts.slice(0, -1), rest: parts[parts.length - 1] ?? '' };
       }
 
-      // Algunos backends/proxies envian los separadores como texto escapado: "\\n\\n"
-      if (source.includes('\\n\\n')) {
-        const parts = source.split('\\n\\n');
-        return { events: parts.slice(0, -1), rest: parts[parts.length - 1] ?? '' };
+      // Algunos backends/proxies envian el stream como texto escapado: "data: {...}\\n\\ndata: {...}"
+      if (source.includes('\\n\\ndata:')) {
+        return splitEscapedEvents(source);
       }
 
       return { events: [], rest: source };
@@ -78,8 +100,14 @@ export const chatApi = {
       buffer += decoder.decode(value, { stream: !done });
 
       const split = splitEvents(buffer);
-      const events = split.events;
+      const events = [...split.events];
       buffer = split.rest;
+
+      // Si ya terminó la lectura y quedó un último evento sin delimitador final, lo procesamos.
+      if (done && buffer.trimStart().startsWith('data:')) {
+        events.push(buffer);
+        buffer = '';
+      }
 
       for (const event of events) {
         const lines = event.split(/\r?\n/);
