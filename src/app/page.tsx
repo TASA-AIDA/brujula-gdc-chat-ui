@@ -2,7 +2,7 @@ import { Chat } from '@/components/chat/Chat';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-[100dvh] overflow-hidden bg-slate-100">
       <Chat />
     </div>
   );
