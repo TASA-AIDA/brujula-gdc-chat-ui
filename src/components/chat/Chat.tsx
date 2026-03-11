@@ -74,15 +74,7 @@ export const Chat = () => {
   };
 
   return (
-    // Replace the fixed `h-screen` height with a dynamic viewport height so the
-    // layout adapts to mobile browsers where `100vh` can over-report the
-    // available space when the address bar is visible【355490015329951†L46-L66】.  We also
-    // remove `overflow-hidden` and instead restrict only horizontal overflow
-    // so vertical content isn't clipped【560733345096033†L90-L92】.  Switching from a grid
-    // layout to `flex flex-col` simplifies the layout and avoids row height
-    // quirks that can cause the hero card to collapse.  The `flex-1` on the
-    // `main` element below allows it to expand and scroll when necessary.
-    <div className="min-h-[100svh] bg-slate-100 relative overflow-hidden flex flex-col">
+    <div className="h-full bg-slate-100 relative overflow-hidden flex flex-col">
       
 
       <header className="relative z-10 bg-[#0C3D63] text-white shadow-lg border-b border-white/10 shrink-0">
@@ -108,7 +100,7 @@ export const Chat = () => {
         </div>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-2 md:py-2.5 flex-1 flex flex-col gap-2 overflow-y-auto">
+      <main className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-6 py-2 md:py-2.5 flex-1 min-h-0 flex flex-col gap-2 overflow-hidden">
         <section>
           <div className="rounded-[18px] bg-gradient-to-r from-[#0C3D63] to-[#1D6E8C] text-white p-2.5 md:p-3 shadow-xl border border-white/10">
             <div className="max-w-3xl">
