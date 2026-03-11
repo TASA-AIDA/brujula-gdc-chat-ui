@@ -23,12 +23,12 @@ export const ChatInput = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <div className="flex items-center gap-3 rounded-[24px] border border-slate-200 bg-slate-50 px-3 md:px-4 py-3 shadow-inner">
+      <form onSubmit={handleSubmit} className="space-y-2">
+        <div className="flex items-center gap-2.5 rounded-[22px] border border-slate-200 bg-slate-50 px-3 md:px-4 py-2 shadow-inner">
           <button
             type="button"
             aria-label="Agregar contexto"
-            className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-700 text-2xl flex items-center justify-center shrink-0 hover:bg-emerald-100 transition"
+            className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 text-xl flex items-center justify-center shrink-0 hover:bg-emerald-100 transition"
           >
             +
           </button>
@@ -38,13 +38,13 @@ export const ChatInput = ({
             value={message}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
             placeholder="Describe la capacitación, el público o la necesidad de aprendizaje..."
-            className="flex-1 bg-transparent outline-none text-slate-700 placeholder:text-slate-400 text-sm md:text-base"
+            className="flex-1 bg-transparent outline-none text-slate-700 placeholder:text-slate-400 text-sm"
           />
 
           <button
             type="submit"
             disabled={!message.trim() || isLoading}
-            className="rounded-2xl bg-[#1AA56B] hover:bg-[#15925e] text-white font-semibold px-5 py-3 shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-xl bg-[#1AA56B] hover:bg-[#15925e] text-white font-semibold px-4 py-2 shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
